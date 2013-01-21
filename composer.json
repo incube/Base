@@ -1,5 +1,5 @@
 {
-    "name": "incube/Base",
+    "name": "incube/base",
     "type": "library",
     "keywords": ["framework", "mvc", "incube", "event"],
     "description": "Micro brick framework based on IOC, Simplicity and Flexibility",
