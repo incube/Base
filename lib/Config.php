@@ -52,6 +52,8 @@ class Config {
                     break;
 
                 case 'swp':
+                case 'gitignore':
+                case 'dist':
                     break;
 
                 case '':
