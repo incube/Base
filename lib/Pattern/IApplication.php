@@ -1,5 +1,5 @@
 <?php
-namespace Incube\Pattern;
+namespace Incube\Base\Pattern;
 /** @author incubatio
   * This model contain is a base for web application
   * @depandancies Incube_Pattern_IURI, Incube_Pattern_IChecker, Incube_Pattern_IFilter 

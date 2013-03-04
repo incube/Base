@@ -1,32 +1,28 @@
 <?php
-namespace Incube;
+namespace Incube\Base;
 /** @author incubatio
-  * @depandancies Incube_IArray, Incube_File_Explorer
+  * @depandancies Incube\DataObject, \Incube\File_Explorer
   * @licence GPLv3.0 http://www.gnu.org/licenses/gpl.html
   */
 
-use Incube\FileExplorer;
-use Incube\OArray;
-
 class Config {
 
+    /** @param mixed $data 
+      * @return array */
     protected function _parse_xml($data) {
         $data = (array) $data;
         foreach($data as $key => $datum) {
-            if(is_object($datum) or is_array($datum)) {
-                $data[$key] = $this->_parse_xml($datum);
-            } else {
-                $data[$key] = trim($datum);
-            }
+            $data[$key] = is_object($datum) || is_array($datum) ? $this->_parse_xml($datum) : trim($datum);
         }
         return $data;
     }
 
     /** Load a configuration file
-      * @param 	string 	$file
-      * @param 	bool $allowModifications
-      * @return Incube_Array
-	  * TODO: validates config files !!!!! */
+      *
+      * @param 	string 	$path
+      * @param 	bool $assoc
+      * @param 	bool $forced_type
+      * @return DataObject */
 	public function load($path, $assoc = true, $forced_type = false){
 
 		if(FileExplorer::exists($path)) {
@@ -46,6 +42,7 @@ class Config {
                     $data =	include_once $path;
                     break;
 
+				//XML has not been concieved for configuration, but for storage
                 case 'xml':
                     $data = simplexml_load_file($path);
                     $data = $this->_parse_xml($data);	
@@ -63,15 +60,9 @@ class Config {
                 default:
                     trigger_error(__class__ . " doesn't support $ext filetype.");
 				
-				//XML is not designed for configuration, but for storage (or as a relational database)
-				//case 'xml':
-				//if you insist by using xml as config file, use php extention like PECL which much faster than any php parser.
-
-				//case 'yaml':
-				//you need to install PECL module, No Way I implement a "not very efficient" parser like symphony");
 			}
 		}
-        if(isset($data)) $data = $assoc ? $data : DataObject::array_to_data_object($data);
+        if(isset($data)) $data = $assoc ? $data : DataObject::from_array($data);
 		return isset($data) ? $data : false;
     }
 
@@ -102,10 +93,11 @@ class Config {
             unset($config_file);
         }
 
-        return $is_assoc ? DataObject::array_to_data_object($config) : $config;
+        return $is_assoc ? DataObject::from_array($config) : $config;
     }
 
 	/** Convert recursively arrays to Objects
+      *
 	  * @param array $assoc 
 	  * @return StdClass */
 	public function array_to_object(array $assoc) {
@@ -119,6 +111,7 @@ class Config {
 
 
 	/** Write a file in a specific format to a specific location
+      *
 	  * @param string $path 
 	  * @param array $data */
 	public function save($path, array $data) {

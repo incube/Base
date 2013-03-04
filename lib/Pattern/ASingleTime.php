@@ -1,4 +1,5 @@
 <?php
+namespace Incube\Base\Pattern;
 /** @author incubatio
   * @licence GPLv3.0 http://www.gnu.org/licenses/gpl.html
   * 
@@ -7,12 +8,12 @@
   *
   */
 
-abstract class Incube_Pattern_SingleTime_Abstract {
+abstract class ASingleTime {
 
 	protected static $_used = false;
 
 	/** @return Oject */
-	public static function getInstance() {
+	public static function get_instance() {
 		if(!self::$_used) {
 			self::$_used = true;
 			//php 5.3 needed to use get called class, copy this method in the child class

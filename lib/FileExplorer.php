@@ -1,5 +1,5 @@
 <?php
-namespace Incube;
+namespace Incube\Base;
 /** @author incubatio
   * @licence GPLv3.0 http://www.gnu.org/licenses/gpl.html 
   */

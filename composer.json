@@ -1,15 +1,15 @@
 {
     "name": "incube/base",
     "type": "library",
-    "keywords": ["framework", "mvc", "incube", "event"],
-    "description": "Micro brick framework based on IOC, Simplicity and Flexibility",
+    "keywords": ["framework", "incube"],
+    "description": "Brick micro-framework based on IOC, Simplicity and Flexibility",
     "homepage": "http://github.com/Incube/Base",
     "license": "GPLv3.0",
     "minimum-stability": "stable",
     "authors": [
         {
             "name": "Nicolas Morel",
-            "email": "work@incubatio.org"
+            "email": "incube@incubatio.org"
         }
     ],
     "require": {

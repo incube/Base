@@ -1,10 +1,10 @@
 <?php
-namespace Incube;
+namespace Incube\Base;
 /** @author incubatio
   * @licence GPLv3.0 http://www.gnu.org/licenses/gpl.html
   */
 
-use Incube\Pattern\IDataObject;
+use Incube\Base\Pattern\IDataObject;
 
 class DataObject implements IDataObject{
 
@@ -35,7 +35,7 @@ class DataObject implements IDataObject{
 	public function has($key) {
 		return array_key_exists($key, $this->_data);
 	}
-	
+
 	/** @return array */
 	public function to_array() {
 		$data = array();
@@ -58,11 +58,11 @@ class DataObject implements IDataObject{
 
 	/** @param array $assoc
 	  * @return Incube_Array */
-	public static function array_to_data_object(array $assoc) {
+	public static function from_array(array $assoc) {
 		$object = new DataObject();
 		foreach($assoc as $key => $value) {
 			$key = trim($key);
-            $value = (is_array($value)) ? self::array_to_data_object($value) : $value;
+            $value = (is_array($value)) ? self::from_array($value) : $value;
 			$object->set($key, $value); 
 		}
 		return $object;

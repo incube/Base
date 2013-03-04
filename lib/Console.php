@@ -1,6 +1,5 @@
 <?php
-
-namespace Incube\Tools;
+namespace Incube\Base;
 /** @author incubatio
   * @depandancies Incube_IArray, Incube_File_Explorer
   * @licence GPLv3.0 http://www.gnu.org/licenses/gpl.html
